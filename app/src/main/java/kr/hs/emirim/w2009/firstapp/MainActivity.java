@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         btn_move = findViewById(R.id.btn_move);
         et_test = findViewById(R.id.et_test);
 
-        test = (ImageView)findViewById(R.id.test);
+        test = findViewById(R.id.test);
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
