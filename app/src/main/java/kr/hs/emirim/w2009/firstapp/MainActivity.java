@@ -9,12 +9,15 @@ import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     Button btn_move;
     EditText et_test;
     String str;
+    ImageView test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { //어플을 틀었을 때 처음 실행부분
@@ -23,6 +26,14 @@ public class MainActivity extends AppCompatActivity {
 
         btn_move = findViewById(R.id.btn_move);
         et_test = findViewById(R.id.et_test);
+
+        test = (ImageView)findViewById(R.id.test);
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Toast test", Toast.LENGTH_SHORT).show();      //본인의 액티비티
+            }
+        });
 
         btn_move.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,5 +44,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent); //activity 이동
             }
         });
+
+
+
 
     }}
