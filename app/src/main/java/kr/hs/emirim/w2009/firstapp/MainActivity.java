@@ -45,6 +45,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 list.setItemChecked(position,true);
+                if (position == 0){
+                    Toast.makeText(getApplicationContext(),"winter",Toast.LENGTH_SHORT).show();
+                }else if(position == 1){
+                    Toast.makeText(getApplicationContext(),"karina",Toast.LENGTH_SHORT).show();
+                }else if(position == 2){
+                    Toast.makeText(getApplicationContext(),"jeny",Toast.LENGTH_SHORT).show();
+                }
                 intent.putExtra("data",position);
 
             }
