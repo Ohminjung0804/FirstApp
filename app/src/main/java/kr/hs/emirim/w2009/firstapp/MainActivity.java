@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 list.setItemChecked(position,true);
-                intent.putExtra("data",data[position]);
+                intent.putExtra("data",position);
 
             }
         });
