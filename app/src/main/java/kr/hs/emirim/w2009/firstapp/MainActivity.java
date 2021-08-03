@@ -8,6 +8,7 @@ import android.icu.text.CaseMap;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,29 +21,42 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText et_save;
-    String shared = "file";
+    ListView list;
+    Button btn_check;
+    String[] data = {"윈터","카리나","제니"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { //어플을 틀었을 때 처음 실행부분
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        et_save = findViewById(R.id.et_save);
-        SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
-        String value = sharedPreferences.getString("value","");//defValue 꺼내오기 때문에 빈 값을 씀
-        et_save.setText(value);
+        list = findViewById(R.id.list);
+        btn_check = findViewById(R.id.btn_check);
+
+
+
+        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_single_choice,data);
+        list.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        list.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        Intent intent = new Intent(getApplicationContext(), sub.class);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                list.setItemChecked(position,true);
+                intent.putExtra("data",data[position]);
+
+            }
+        });
+
+        btn_check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intent);
+            }
+        });
     }
 
-    @Override
-    protected void onDestroy() { //메인 액티비티를 벗어났을 때 호출됨
-        super.onDestroy();
-        SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        String value = et_save.getText().toString();
-        editor.putString("value",value);
-        editor.commit();
-        //sharedPreferences안에 editor를 연결
-        //editor = 저장할 때 불러와야 하는 것
-    }
+
 }
